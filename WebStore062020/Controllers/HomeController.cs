@@ -9,55 +9,11 @@ namespace WebStore062020.Controllers
 {
     public class HomeController : Controller
     {
-        private static readonly List<Employee> _Employees = new List<Employee>
-        {
-            new Employee
-            {
-                Id = 1,
-                Age = 23,
-                Birthday = "20.10.1997",
-                SurName = "Гикбрейнс",
-                FirstName = "Павел",
-                SecondName = "Викторович"
-            },
-            new Employee
-            {
-                Id = 2,
-                Age = 33,
-                Birthday = "02.04.1987",
-                SurName = "Зайцев",
-                FirstName = "Александр",
-                SecondName = "Сергеевич"
-            },
-            new Employee
-            {
-                Id = 3,
-                Age = 43,
-                Birthday = "15.01.1977",
-                SurName = "Ловчев",
-                FirstName = "Владимир",
-                SecondName = "Алексеевич"
-            },
-
-        };
-
 
         public IActionResult Index() => View();
 
-        public IActionResult Employees()
-        {
-            var employees = _Employees;
-            return View(employees);
-        }
 
-        public IActionResult EmployeeInfo(int id)
-        {
-            var employee = _Employees.FirstOrDefault(e => e.Id == id);
-            if (employee is null)
-                return NotFound();
 
-            return View(employee);
-        }
 
     }
 }
