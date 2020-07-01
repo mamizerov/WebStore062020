@@ -1,0 +1,63 @@
+﻿@model BlogsViewModel
+
+@{
+    ViewData["Title"] = "Редактирование блога.";
+}
+
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+    <hr />
+
+    <form asp-action="Edit">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input asp-for="Id" type="hidden" />
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Author" class="control-label"></label>
+                    <input asp-for="Author" class="form-control" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TimeBlog" class="control-label"></label>
+                    <input asp-for="TimeBlog" class="form-control" />
+                    <span asp-validation-for="TimeBlog" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DateBlog" class="control-label"></label>
+                    <input asp-for="DateBlog" class="form-control" />
+                    <span asp-validation-for="DateBlog" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="StarsBlog" class="control-label"></label>
+                    <input asp-for="StarsBlog" class="form-control" />
+                    <span asp-validation-for="StarsBlog" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TextBlog" class="control-label"></label>
+                    <input asp-for="TextBlog" class="form-control" />
+                    <span asp-validation-for="TextBlog" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                    <a asp-action="Index" class="btn btn-info">К списку</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

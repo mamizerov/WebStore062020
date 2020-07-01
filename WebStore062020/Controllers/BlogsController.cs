@@ -27,53 +27,54 @@ namespace WebStore062020.Controllers
             return View(blog);
         }
 
-        /*
         #region Edit
 
         public IActionResult Edit(int? id)
         {
-            if (id is null) return View(new EmployeesViewModel());
+            if (id is null) return View(new BlogsViewModel());
 
             if (id < 0)
                 return BadRequest();
 
-            var employee = _EmployeesData.GetById((int)id);
-            if (employee is null)
+            var blog = _BlogsData.GetById((int)id);
+            if (blog is null)
                 return NotFound();
 
-            return View(new EmployeesViewModel
+            return View(new BlogsViewModel
             {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                SecondName = employee.SecondName,
-                SurName = employee.SurName,
-                Birthday = employee.Birthday,
-                Age = employee.Age
+                Id = blog.Id,
+                Name = blog.Name,
+                Author = blog.Author,
+                TimeBlog = blog.TimeBlog,
+                DateBlog = blog.DateBlog,
+                StarsBlog = blog.StarsBlog,
+                TextBlog = blog.TextBlog
             });
         }
 
         [HttpPost]
-        public IActionResult Edit(EmployeesViewModel Model)
+        public IActionResult Edit(BlogsViewModel Model)
         {
             if (Model is null)
                 throw new ArgumentNullException(nameof(Model));
 
-            var employee = new Employee
+            var blog = new Blog
             {
                 Id = Model.Id,
-                FirstName = Model.FirstName,
-                SecondName = Model.SecondName,
-                SurName = Model.SurName,
-                Birthday = Model.Birthday,
-                Age = Model.Age
+                Name = Model.Name,
+                Author = Model.Author,
+                TimeBlog = Model.TimeBlog,
+                DateBlog = Model.DateBlog,
+                StarsBlog = Model.StarsBlog,
+                TextBlog = Model.TextBlog
             };
 
             if (Model.Id == 0)
-                _EmployeesData.Add(employee);
+                _BlogsData.Add(blog);
             else
-                _EmployeesData.Edit(employee);
+                _BlogsData.Edit(blog);
 
-            _EmployeesData.SaveChanges();
+            _BlogsData.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
@@ -87,32 +88,32 @@ namespace WebStore062020.Controllers
             if (id <= 0)
                 return BadRequest();
 
-            var employee = _EmployeesData.GetById(id);
-            if (employee is null)
+            var blog = _BlogsData.GetById(id);
+            if (blog is null)
                 return NotFound();
 
-            return View(new EmployeesViewModel
+            return View(new BlogsViewModel
             {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                SecondName = employee.SecondName,
-                SurName = employee.SurName,
-                Birthday = employee.Birthday,
-                Age = employee.Age
+                Id = blog.Id,
+                Name = blog.Name,
+                Author = blog.Author,
+                TimeBlog = blog.TimeBlog,
+                DateBlog = blog.DateBlog,
+                StarsBlog = blog.StarsBlog,
+                TextBlog = blog.TextBlog
             });
         }
 
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
-            _EmployeesData.Delete(id);
-            _EmployeesData.SaveChanges();
+            _BlogsData.Delete(id);
+            _BlogsData.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
 
         #endregion
 
-        */
     }
 }
