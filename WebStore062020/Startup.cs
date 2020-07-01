@@ -22,6 +22,7 @@ namespace WebStore062020
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IBlogsData, InMemoryBlogsData>();
         }
 
 

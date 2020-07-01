@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore062020.Infrastructure.Interfaces;
 using WebStore062020.Models;
 
 namespace WebStore062020.Controllers
@@ -12,7 +13,7 @@ namespace WebStore062020.Controllers
 
         public IActionResult Index() => View();
 
-        public IActionResult Blogs() => View();
+//        public IActionResult Blogs() => View();
 
         public IActionResult BlogSingle() => View();
 
