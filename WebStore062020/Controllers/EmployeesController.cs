@@ -15,8 +15,16 @@ namespace WebStore062020.Controllers
         public EmployeesController(IEmployeesData EmployeesData) => _EmployeesData = EmployeesData;
 
 
-        public IActionResult Index() => View(_EmployeesData.Get());
-  
+        public IActionResult Index() => View(_EmployeesData.Get().Select(employee => new EmployeesViewModel
+        {
+            Id = employee.Id,
+            FirstName = employee.FirstName,
+            SecondName = employee.SecondName,
+            SurName = employee.SurName,
+            Birthday = employee.Birthday,
+            Age = employee.Age
+        }));
+
 
         public IActionResult Details(int id)
         {
@@ -24,12 +32,20 @@ namespace WebStore062020.Controllers
             if (employee is null)
                 return NotFound();
 
-            return View(employee);
+            return View(new EmployeesViewModel
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                SecondName = employee.SecondName,
+                SurName = employee.SurName,
+                Birthday = employee.Birthday,
+                Age = employee.Age
+            });
         }
 
-        #region Edit
+            #region Edit
 
-        public IActionResult Edit(int? id)
+            public IActionResult Edit(int? id)
         {
             if (id is null) return View(new EmployeesViewModel());
 
@@ -56,6 +72,12 @@ namespace WebStore062020.Controllers
         {
             if (Model is null)
                 throw new ArgumentNullException(nameof(Model));
+
+            if (Model.Age < 18 || Model.Age > 75)
+                ModelState.AddModelError(nameof(Employee.Age), "Возраст должен быть всё же в пределах от 18 до 75");
+
+            if (!ModelState.IsValid)
+                return View(Model);
 
             var employee = new Employee
             {

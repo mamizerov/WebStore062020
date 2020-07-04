@@ -1,4 +1,4 @@
-﻿@model WebStore062020.Models.Employee
+﻿@model  EmployeesViewModel
 
     <div class="container">
 
@@ -20,7 +20,7 @@
             <dt>Возраст</dt>
             <dd>@Model.Age</dd>
 
-            <dt>Дата рождения</dt>
+            <dt><label asp-for="Birthday"></label></dt>
             <dd>@Model.Birthday</dd>
 
         </dl>
