@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebStore062020.Models;
 
 namespace WebStore062020.Data
@@ -11,7 +12,7 @@ namespace WebStore062020.Data
             {
                 Id = 1,
                 Age = 23,
-                Birthday = "20.10.1997",
+                Birthday = Convert.ToDateTime("20.10.1997"),
                 SurName = "Гикбрейнс",
                 FirstName = "Павел",
                 SecondName = "Викторович"
@@ -20,7 +21,7 @@ namespace WebStore062020.Data
             {
                 Id = 2,
                 Age = 33,
-                Birthday = "02.04.1987",
+                Birthday = Convert.ToDateTime("02.04.1987"),
                 SurName = "Зайцев",
                 FirstName = "Александр",
                 SecondName = "Сергеевич"
@@ -29,7 +30,7 @@ namespace WebStore062020.Data
             {
                 Id = 3,
                 Age = 43,
-                Birthday = "15.01.1977",
+                Birthday = Convert.ToDateTime("15.01.1977"),
                 SurName = "Ловчев",
                 FirstName = "Владимир",
                 SecondName = "Алексеевич"
@@ -38,7 +39,7 @@ namespace WebStore062020.Data
             {
                 Id = 4,
                 Age = 53,
-                Birthday = "15.01.1967",
+                Birthday = Convert.ToDateTime("15.01.1967"),
                 SurName = "Петров",
                 FirstName = "Виктор",
                 SecondName = "Палыч"

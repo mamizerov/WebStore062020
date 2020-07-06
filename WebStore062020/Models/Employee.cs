@@ -17,6 +17,6 @@ namespace WebStore062020.Models
 
         public int Age { get; set; }
 
-        public string Birthday { get; set; }
+        public DateTime Birthday { get; set; }
     }
 }

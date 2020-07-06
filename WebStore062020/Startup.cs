@@ -23,6 +23,7 @@ namespace WebStore062020
 
             services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IBlogsData, InMemoryBlogsData>();
+            services.AddScoped<IProductData, InMemoryProductData>();
         }
 
 

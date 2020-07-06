@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebStore062020.ViewModels
 {
@@ -12,7 +13,7 @@ namespace WebStore062020.ViewModels
         public int Age { get; set; }
 
         [Display(Name = "День рождения")]
-        public string Birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         [Display(Name = "Фамилия")]
         [Required(ErrorMessage = "Фамилия является обязательным")]

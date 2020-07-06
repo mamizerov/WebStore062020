@@ -27,8 +27,6 @@ namespace WebStore062020.Controllers
 
         public IActionResult ProductDetails() => View();
 
-        public IActionResult Shop() => View();
-
         public IActionResult Error404() => View();
 
 
