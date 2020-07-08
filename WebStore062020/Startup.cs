@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore062020.Infrastructure.Services;
 using WebStore062020.Infrastructure.Interfaces;
+using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStore062020
 {
@@ -19,6 +21,9 @@ namespace WebStore062020
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<WebStoreDB>(opt =>
+                opt.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
