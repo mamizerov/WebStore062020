@@ -7,6 +7,7 @@ using WebStore062020.Infrastructure.Services;
 using WebStore062020.Infrastructure.Interfaces;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using WebStore062020.Data;
 
 namespace WebStore062020
 {
@@ -23,6 +24,7 @@ namespace WebStore062020
         {
             services.AddDbContext<WebStoreDB>(opt =>
                 opt.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<WebStoreDBInitializer>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
@@ -32,8 +34,10 @@ namespace WebStore062020
         }
 
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
         {
+            db.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

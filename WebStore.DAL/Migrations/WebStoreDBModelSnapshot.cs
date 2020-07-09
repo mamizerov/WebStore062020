@@ -54,13 +54,6 @@ namespace WebStore.DAL.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecondName")
                         .HasColumnType("nvarchar(max)");
 
