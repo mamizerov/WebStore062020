@@ -1,0 +1,32 @@
+﻿@model  EmployeesViewModel
+
+    <div class="container">
+
+        <h3>Сотрудник</h3>
+
+        <dl class="dl-horizontal">
+            <dt>Id</dt>
+            <dd>@Model.Id</dd>
+
+            <dt>Фамилия</dt>
+            <dd>@Model.SurName</dd>
+
+            <dt>Имя</dt>
+            <dd>@Model.FirstName</dd>
+
+            <dt>Отчество</dt>
+            <dd>@Model.SecondName</dd>
+
+            <dt>Возраст</dt>
+            <dd>@Model.Age</dd>
+
+            <dt><label asp-for="Birthday"></label></dt>
+            <dd>@Model.Birthday.ToShortDateString()</dd>
+
+        </dl>
+
+
+        <hr />
+        <a asp-controller="Employees" asp-action="Index">К списку сотрудников</a>
+
+    </div>

@@ -1,39 +1,57 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore062020.Infrastructure.Services;
+using WebStore062020.Infrastructure.Interfaces;
+using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore;
+using WebStore062020.Data;
 
 namespace WebStore062020
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        private readonly IConfiguration _Configuration;
+
+        public Startup(IConfiguration Configuration)
         {
+            _Configuration = Configuration;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<WebStoreDB>(opt =>
+                opt.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<WebStoreDBInitializer>();
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IBlogsData, InMemoryBlogsData>();
+            services.AddScoped<IProductData, InMemoryProductData>();
+        }
+
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
+        {
+            db.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name:"default",
+                    pattern: "{controller=Home}/{action=Index}/{ID?}");
             });
         }
     }
