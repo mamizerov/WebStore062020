@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using WebStore.Domain.Entities.Base;
 
-namespace WebStore062020.Models
+namespace WebStore.Domain.Entities
 {
-    public class Employee
+    [Table("TEmployees")]
+    public class Employee : Entity
     {
-        public int Id { get; set; }
         public int Age { get; set; }
         public DateTime Birthday { get; set; }
         public string SurName { get; set; }

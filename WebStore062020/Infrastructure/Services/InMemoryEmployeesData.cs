@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebStore062020.Data;
 using WebStore062020.Infrastructure.Interfaces;
-using WebStore062020.Models;
+using WebStore.Domain.Entities;
 
 namespace WebStore062020.Infrastructure.Services
 {

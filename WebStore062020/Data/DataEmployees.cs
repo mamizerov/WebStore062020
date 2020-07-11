@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebStore062020.Models;
+using WebStore.Domain.Entities;
 
 namespace WebStore062020.Data
 {
