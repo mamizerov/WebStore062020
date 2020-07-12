@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using WebStore.Domain.Entities.Base;
 
-namespace WebStore062020.Models
+namespace WebStore.Domain.Entities
 {
+    [Table("TEmployees")]
     public class Employee
     {
         public int Id { get; set; }

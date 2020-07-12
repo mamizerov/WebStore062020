@@ -10,8 +10,8 @@ using WebStore.DAL.Context;
 namespace WebStore.DAL.Migrations
 {
     [DbContext(typeof(WebStoreDB))]
-    [Migration("20200709194647_Initial2")]
-    partial class Initial2
+    [Migration("20200712183508_Employees3")]
+    partial class Employees3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
