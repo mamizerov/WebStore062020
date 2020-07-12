@@ -21,44 +21,123 @@ namespace WebStore062020.Data
 
             db.Migrate();
 
-            // Наполняем данными продукты-бренды-секции если продукты пустые
-            if (!_db.Products.Any())
+            InitializeProducts();
+            InitializeEmployees();
+        }
+
+        private void InitializeProducts()
+        {
+            if (_db.Products.Any()) return;
+
+            var db = _db.Database;
+            using (db.BeginTransaction())
             {
-                using (db.BeginTransaction())
-                {
-                    _db.Sections.AddRange(TestData.Sections);
+                _db.Sections.AddRange(TestData.Sections);
 
-                    db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[TProductSections] ON");
-                    _db.SaveChanges();
-                    db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[TProductSections] OFF");
+                db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[ProductSections] ON");
+                _db.SaveChanges();
+                db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[ProductSections] OFF");
 
-                    db.CommitTransaction();
-                }
-
-                using (db.BeginTransaction())
-                {
-                    _db.Brands.AddRange(TestData.Brands);
-
-                    db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[TProductBrands] ON");
-                    _db.SaveChanges();
-                    db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[TProductBrands] OFF");
-
-                    db.CommitTransaction();
-                }
-
-                using (db.BeginTransaction())
-                {
-                    _db.Products.AddRange(TestData.Products);
-
-                    db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[TProducts] ON");
-                    _db.SaveChanges();
-                    db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[TProducts] OFF");
-
-                    db.CommitTransaction();
-                }
-
+                db.CommitTransaction();
             }
 
+            using (db.BeginTransaction())
+            {
+                _db.Brands.AddRange(TestData.Brands);
+
+                db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[ProductBrands] ON");
+                _db.SaveChanges();
+                db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[ProductBrands] OFF");
+
+                db.CommitTransaction();
+            }
+
+            using (db.BeginTransaction())
+            {
+                _db.Products.AddRange(TestData.Products);
+
+                db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] ON");
+                _db.SaveChanges();
+                db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] OFF");
+
+                db.CommitTransaction();
+            }
+
+            //var products = TestData.Products;
+            //var sections = TestData.Sections;
+            //var brands = TestData.Brands;
+
+            //var product_section = products.Join(
+            //    sections, 
+            //    p => p.SectionId, 
+            //    s => s.Id, 
+            //    (product, section) => (product, section));
+
+            //foreach (var (product, section) in product_section)
+            //{
+            //    product.Section = section;
+            //    product.SectionId = 0;
+            //}
+
+            //var product_brand = products.Join(
+            //    brands,
+            //    p => p.BrandId,
+            //    b => b.Id,
+            //    (product, brand) => (product, brand));
+
+            //foreach (var (product, brand) in product_brand)
+            //{
+            //    product.Brand = brand;
+            //    product.BrandId = null;
+            //}
+
+            //foreach (var product in products)
+            //    product.Id = 0;
+
+            //var child_sections = sections.Join(
+            //    sections,
+            //    child => child.ParentId,
+            //    parent => parent.Id,
+            //    (child, parent) => (child, parent));
+
+            //foreach (var (child, parent) in child_sections)
+            //{
+            //    child.ParentSection = parent;
+            //    child.ParentId = null;
+            //}
+
+            //foreach (var section in sections)
+            //    section.Id = 0;
+
+            //foreach (var brand in brands)
+            //    brand.Id = 0;
+
+
+            //using (db.BeginTransaction())
+            //{
+            //    _db.Sections.AddRange(sections);
+            //    _db.Brands.AddRange(brands);
+            //    _db.Products.AddRange(products);
+            //    _db.SaveChanges();
+            //    db.CommitTransaction();
+            //}
+        }
+
+
+        private void InitializeEmployees()
+        {
+            if (_db.Employees.Any()) return;
+
+            using (_db.Database.BeginTransaction())
+            {
+                DataEmployees.Employees.ForEach(employee => employee.Id = 0);
+
+                _db.Employees.AddRange(DataEmployees.Employees);
+
+                _db.SaveChanges();
+
+                _db.Database.CommitTransaction();
+            }
         }
     }
 }

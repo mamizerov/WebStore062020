@@ -10,7 +10,7 @@ namespace WebStore.DAL.Context
     // 2. Выполнить Add-Migration Initial -v (-v можно не указвать, verbos -просмотр логов)
     // 3. Выполнить Update-Database
 
-    // public class WebStoreDB : DbContext  использовалось для генерации таблиц продуктов
+    // public class WebStoreDB : DbContext  //использовалось для генерации таблиц продуктов
     public class WebStoreDB : IdentityDbContext<User, Role, string>
     {
         public DbSet<Product> Products { get; set; }
@@ -19,7 +19,7 @@ namespace WebStore.DAL.Context
 
         public DbSet<Brand> Brands { get; set; }
 
-        public DbSet<Employee> Enployees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public WebStoreDB(DbContextOptions<WebStoreDB> Options) : base(Options) { }
     }

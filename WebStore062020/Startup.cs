@@ -11,6 +11,7 @@ using WebStore062020.Data;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
+using WebStore062020.Infrastructure.Services.InSQL;
 
 namespace WebStore062020
 {
@@ -67,7 +68,8 @@ namespace WebStore062020
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+           // services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IEmployeesData, SqlEmployeesData>();
             services.AddScoped<IBlogsData, InMemoryBlogsData>();
             services.AddScoped<IProductData, InMemoryProductData>();
         }
