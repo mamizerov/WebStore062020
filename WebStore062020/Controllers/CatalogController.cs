@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain;
 using WebStore062020.Infrastructure.Interfaces;
+using WebStore062020.Infrastructure.Mapping;
 using WebStore062020.ViewModels;
 
 namespace WebStore062020.Controllers
@@ -26,14 +27,7 @@ namespace WebStore062020.Controllers
             {
                 SectionId = SectionId,
                 BrandId = BrandId,
-                Products = products.Select(p => new ProductViewModel
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Order = p.Order,
-                    Price = p.Price,
-                    ImageUrl = p.ImageUrl
-                }).OrderBy(p => p.Order)
+                Products = products.ToView().OrderBy(p => p.Order)
             });
         }
     }

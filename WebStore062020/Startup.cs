@@ -71,7 +71,8 @@ namespace WebStore062020
            // services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IEmployeesData, SqlEmployeesData>();
             services.AddScoped<IBlogsData, InMemoryBlogsData>();
-            services.AddScoped<IProductData, InMemoryProductData>();
+            //services.AddScoped<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
         }
 
 
