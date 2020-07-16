@@ -12,6 +12,7 @@ using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using WebStore062020.Infrastructure.Services.InSQL;
+using WebStore062020.Infrastructure.Services.InCookies;
 
 namespace WebStore062020
 {
@@ -71,7 +72,9 @@ namespace WebStore062020
            // services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IEmployeesData, SqlEmployeesData>();
             services.AddScoped<IBlogsData, InMemoryBlogsData>();
-            services.AddScoped<IProductData, InMemoryProductData>();
+            //services.AddScoped<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<ICartService, CookiesCartService>();
         }
 
 

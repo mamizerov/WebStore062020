@@ -4,16 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore062020.Infrastructure.Interfaces;
 using WebStore062020.ViewModels;
 using WebStore.Domain.Entities;
+using WebStore062020.Infrastructure.Mapping;
+using Microsoft.AspNetCore.Authorization;
+using WebStore.Domain.Entities.Identity;
 
 namespace WebStore062020.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeesData;
 
         public EmployeesController(IEmployeesData EmployeesData) => _EmployeesData = EmployeesData;
 
-
+        //[Route("All")]
+        public IActionResult Index() => View(_EmployeesData.Get().ToView());
+        /*
         public IActionResult Index() => View(_EmployeesData.Get().Select(employee => new EmployeesViewModel
         {
             Id = employee.Id,
@@ -23,6 +29,7 @@ namespace WebStore062020.Controllers
             Birthday = employee.Birthday,
             Age = employee.Age
         }));
+        */
 
 
         public IActionResult Details(int id)
@@ -31,6 +38,8 @@ namespace WebStore062020.Controllers
             if (employee is null)
                 return NotFound();
 
+            return View(employee.ToView());
+            /*
             return View(new EmployeesViewModel
             {
                 Id = employee.Id,
@@ -40,11 +49,13 @@ namespace WebStore062020.Controllers
                 Birthday = employee.Birthday,
                 Age = employee.Age
             });
+            */
         }
 
             #region Edit
 
-            public IActionResult Edit(int? id)
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(int? id)
         {
             if (id is null) return View(new EmployeesViewModel());
 
@@ -55,6 +66,8 @@ namespace WebStore062020.Controllers
             if (employee is null)
                 return NotFound();
 
+            return View(employee.ToView());
+            /*
             return View(new EmployeesViewModel
             {
                 Id = employee.Id,
@@ -64,9 +77,11 @@ namespace WebStore062020.Controllers
                 Birthday = employee.Birthday,
                 Age = employee.Age
             });
+            */
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(EmployeesViewModel Model)
         {
             if (Model is null)
@@ -78,6 +93,7 @@ namespace WebStore062020.Controllers
             if (!ModelState.IsValid)
                 return View(Model);
 
+            /*
             var employee = new Employee
             {
                 Id = Model.Id,
@@ -86,12 +102,12 @@ namespace WebStore062020.Controllers
                 SurName = Model.SurName,
                 Birthday = Model.Birthday,
                 Age = Model.Age
-            };
+            };*/
 
             if (Model.Id == 0)
-                _EmployeesData.Add(employee);
+                _EmployeesData.Add(Model.FromView());
             else
-                _EmployeesData.Edit(employee);
+                _EmployeesData.Edit(Model.FromView());
 
             _EmployeesData.SaveChanges();
 
@@ -102,6 +118,7 @@ namespace WebStore062020.Controllers
 
         #region Delete
 
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
             if (id <= 0)
@@ -111,6 +128,8 @@ namespace WebStore062020.Controllers
             if (employee is null)
                 return NotFound();
 
+            return View(employee.ToView());
+            /*
             return View(new EmployeesViewModel
             {
                 Id = employee.Id,
@@ -119,7 +138,7 @@ namespace WebStore062020.Controllers
                 SurName = employee.SurName,
                 Birthday = employee.Birthday,
                 Age = employee.Age
-            });
+            });*/
         }
 
         [HttpPost]
