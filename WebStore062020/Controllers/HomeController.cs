@@ -17,13 +17,9 @@ namespace WebStore062020.Controllers
 
         public IActionResult BlogSingle() => View();
 
-        public IActionResult Cart() => View();
-
         public IActionResult Checkout() => View();
 
         public IActionResult ContactUs() => View();
-
-        public IActionResult ProductDetails() => View();
 
         public IActionResult Error404() => View();
 
