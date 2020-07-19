@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
@@ -38,10 +39,18 @@ namespace WebStore062020.Infrastructure.Services.InSQL
             return query/*.ToArray()*/;
         }
 
-
         public Product GetProductById(int id) => _db.Products
            .Include(product => product.Brand)
            .Include(product => product.Section)
            .FirstOrDefault(product => product.Id == id);
+
+        public void Edit(Product product)
+        {
+            if (product is null) throw new ArgumentNullException(nameof(product));
+
+            _db.Update(product);
+        }
+
+        public void SaveChanges() => _db.SaveChanges();
     }
 }

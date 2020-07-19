@@ -13,5 +13,9 @@ namespace WebStore062020.Infrastructure.Interfaces
         IEnumerable<Product> GetProducts(ProductFilter Filter = null);
 
         Product GetProductById(int id);
+
+        void Edit(Product product);
+
+        void SaveChanges();
     }
 }

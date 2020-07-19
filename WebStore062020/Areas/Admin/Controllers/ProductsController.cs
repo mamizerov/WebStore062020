@@ -29,6 +29,9 @@ namespace WebStore062020.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(product);
 
+            _ProductData.Edit(product);
+            _ProductData.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
